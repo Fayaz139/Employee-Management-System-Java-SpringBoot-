@@ -27,7 +27,7 @@ public class Employee {
     private String country;
     private String city;
 
-    private String skills; // comma-separated (e.g. Java,Spring,SQL)
+    private String skills; 
 
     // Getters and Setters
 
