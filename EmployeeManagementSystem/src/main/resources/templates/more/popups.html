@@ -1,142 +1,170 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       th:replace="~{layout :: main-layout(~{::body})}">
-<head>
-    <title>Popups</title>
-    <meta charset="UTF-8">
-
-    
-</head>
 <body>
-	<style>
-	        body {
-	            font-family: Arial, sans-serif;
-	        }
 
-	        button {
-	            margin: 5px;
-	            padding: 6px 12px;
-	            cursor: pointer;
-	        }
+    <style>
+        /* --- GRID CONTAINER --- */
+        .popup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+            gap: 20px; /* Space between buttons */
+            max-width: 900px; /* Optional: Stops them from getting too wide on huge screens */
+            margin-bottom: 30px;
+        }
 
-	        /* In-window popup */
-	        .modal {
-	            display: none;
-	            position: fixed;
-	            top: 0;
-	            left: 0;
-	            width: 100%;
-	            height: 100%;
-	            background: rgba(0,0,0,0.4);
-	        }
+        /* --- BUTTON STYLING --- */
+        .popup-btn {
+            padding: 12px;
+            font-size: 14px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
 
-	        .modal-content {
-	            background: white;
-	            width: 300px;
-	            padding: 20px;
-	            margin: 150px auto;
-	            text-align: center;
-	            border-radius: 4px;
-	        }
+        .popup-btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-	        .close {
-	            float: right;
-	            cursor: pointer;
-	            font-weight: bold;
-	        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 16px;
+            border-bottom: 2px solid #3c8dbc;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
 
-	        #promptResult {
-	            margin-top: 15px;
-	            font-weight: bold;
-	        }
-	    </style>
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
 
-<h2>Popups Feature</h2>
+        .modal-content {
+            background: white;
+            width: 350px;
+            padding: 25px;
+            margin: 15% auto;
+            text-align: center;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
 
-<!-- Browser Popups -->
-<button onclick="openPopup('Popup One')">Popup One</button>
-<button onclick="openPopup('Popup Two')">Popup Two</button>
-<button onclick="openPopup('Popup Three')">Popup Three</button>
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #999;
+        }
+        .close:hover { color: #333; }
 
-<br><br>
+        #promptResult {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #3c8dbc;
+        }
+    </style>
 
-<button onclick="duplicatePopup()">Duplicate Popup</button>
-<button onclick="duplicateTab()">Duplicate Tab</button>
+    <h2>Popups Feature</h2>
+    <p style="color: #777; margin-bottom: 20px;">Explore different types of browser and window popups.</p>
 
-<br><br>
-
-<button onclick="openModal()">In Window Popup</button>
-
-<br><br>
-
-<button onclick="showAlert()">Alert Box</button>
-<button onclick="showConfirm()">Confirm Box</button>
-<button onclick="showPrompt()">Prompt Box</button>
-
-<div id="promptResult"></div>
-
-<!-- In-window modal -->
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">×</span>
-        <h3>Popup One</h3>
+    <h3>Browser Windows</h3>
+    <div class="popup-grid">
+        <button class="popup-btn" onclick="openPopup('Popup One')">Popup One</button>
+        <button class="popup-btn" onclick="openPopup('Popup Two')">Popup Two</button>
+        <button class="popup-btn" onclick="openPopup('Popup Three')">Popup Three</button>
+        <button class="popup-btn" onclick="duplicatePopup()">Duplicate Popup</button>
+        <button class="popup-btn" onclick="duplicateTab()">Duplicate Tab</button>
     </div>
-</div>
 
-<script>
-    let popupRef;
+    <h3>Alerts & Modals</h3>
+    <div class="popup-grid">
+        <button class="popup-btn" onclick="showAlert()">Alert Box</button>
+        <button class="popup-btn" onclick="showConfirm()">Confirm Box</button>
+        <button class="popup-btn" onclick="showPrompt()">Prompt Box</button>
+        <button class="popup-btn" onclick="openModal()">In Window Popup</button>
+    </div>
 
-    function openPopup(title) {
-        popupRef = window.open(
-            "",
-            "_blank",
-            "width=400,height=300"
-        );
-        popupRef.document.write(
-            "<h2>" + title + "</h2>"
-        );
-    }
+    <div id="promptResult"></div>
 
-    function duplicatePopup() {
-        if (popupRef && !popupRef.closed) {
-            popupRef = window.open(
-                popupRef.location.href,
-                "_blank",
-                "width=400,height=300"
-            );
-        } else {
-            openPopup("Popup One");
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">×</span>
+            <h3 style="border:none;">Popup One</h3>
+            <p>This is a custom modal inside the window.</p>
+            <button class="popup-btn" onclick="closeModal()" style="margin-top: 15px; background: #3c8dbc; color: white; border: none;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let popupRef;
+
+        function openPopup(title) {
+            popupRef = window.open("", "_blank", "width=400,height=300");
+            popupRef.document.write("<div style='text-align:center; padding:20px; font-family:sans-serif;'><h2>" + title + "</h2><p>This is a new window.</p></div>");
         }
-    }
 
-    function duplicateTab() {
-        window.open(window.location.href, "_blank");
-    }
-
-    function openModal() {
-        document.getElementById("modal").style.display = "block";
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
-
-    function showAlert() {
-        alert("Alert!!");
-    }
-
-    function showConfirm() {
-        confirm("Confirmed!!");
-    }
-
-    function showPrompt() {
-        let input = prompt("Enter something:");
-        if (input !== null) {
-            document.getElementById("promptResult").innerText =
-                "You entered: " + input;
+        function duplicatePopup() {
+            if (popupRef && !popupRef.closed) {
+                popupRef = window.open(popupRef.location.href, "_blank", "width=400,height=300");
+            } else {
+                openPopup("Popup One");
+            }
         }
-    }
-</script>
+
+        function duplicateTab() {
+            window.open(window.location.href, "_blank");
+        }
+
+        function openModal() {
+            document.getElementById("modal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        function showAlert() {
+            alert("This is an Alert Box!");
+        }
+
+        function showConfirm() {
+            if(confirm("Do you confirm this action?")) {
+                document.getElementById("promptResult").innerText = "You clicked OK on Confirm.";
+            } else {
+                document.getElementById("promptResult").innerText = "You clicked Cancel on Confirm.";
+            }
+        }
+
+        function showPrompt() {
+            let input = prompt("Please enter your name:");
+            if (input !== null && input !== "") {
+                document.getElementById("promptResult").innerText = "Hello, " + input + "!";
+            }
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            let modal = document.getElementById("modal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>

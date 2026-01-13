@@ -5,32 +5,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- GLOBAL STYLES --- */
+        /* --- GLOBAL RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Source Sans Pro', sans-serif; background-color: #ecf0f5; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        body { 
+            font-family: 'Source Sans Pro', sans-serif; 
+            background-color: #ecf0f5; 
+            height: 100vh; 
+            overflow: hidden; /* Body doesn't scroll, inner parts do */
+            display: flex; 
+            flex-direction: column; 
+        }
         
-        /* HEADER */
+        /* --- HEADER --- */
         .header { display: flex; height: 50px; background-color: #3c8dbc; color: white; flex-shrink: 0; z-index: 1000; justify-content: space-between; align-items: center; padding: 0;}
         .logo { width: 230px; height: 100%; background-color: #367fa9; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; }
         .navbar-right { padding-right: 20px; }
         .logout-btn { color: white; text-decoration: none; font-size: 14px; background: #e74c3c; padding: 5px 10px; border-radius: 3px;}
         
-        /* WRAPPER */
-        .wrapper { display: flex; flex: 1; height: calc(100vh - 50px); }
-        
-        /* CONTENT WRAPPER - UPDATED FOR STICKY FOOTER */
-        .content-wrapper { 
+        /* --- MAIN WRAPPER (Sidebar + Right Side) --- */
+        .wrapper { 
+            display: flex; 
             flex: 1; 
-            padding: 20px; 
-            overflow-y: auto; 
-            background-color: #ecf0f5; 
-            
-            /* THESE 2 LINES FIX THE FOOTER POSITION */
-            display: flex;
-            flex-direction: column;
+            height: calc(100vh - 50px); /* Fill remaining height */
         }
         
-        /* SIDEBAR */
+        /* --- SIDEBAR --- */
         .sidebar { width: 230px; background-color: #222d32; color: #b8c7ce; display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; }
         .user-panel { padding: 15px; border-bottom: 1px solid #3e494e; display: flex; gap: 10px; align-items: center; }
         .user-img { width: 40px; height: 40px; border-radius: 50%; background: white; color: #333; display: flex; align-items: center; justify-content: center;}
@@ -38,7 +37,6 @@
         /* MENU STYLES */
         .sidebar-menu { list-style: none; margin-top: 10px; }
         .header-text { padding: 10px 15px; font-size: 12px; background: #1a2226; text-transform: uppercase; color: #4b646f; margin-top: 5px;}
-        
         .sidebar-menu li a { padding: 12px 15px; display: block; color: #b8c7ce; text-decoration: none; border-left: 3px solid transparent; transition: 0.3s; position: relative;}
         .sidebar-menu li a:hover { background-color: #1e282c; color: white; border-left-color: #3c8dbc; }
         .sidebar-menu i { width: 25px; }
@@ -49,17 +47,32 @@
         .pull-right-container { float: right; transition: transform 0.3s; }
         .menu-open > a .pull-right-container { transform: rotate(-90deg); }
 
-        /* FOOTER - UPDATED */
+        /* --- RIGHT SIDE COLUMN (Holds Content + Footer) --- */
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; /* Scroll happens here */
+            background-color: #ecf0f5;
+        }
+
+        /* Content Container (Applies the padding ONLY to the content) */
+        .content-container {
+            flex: 1; /* Pushes footer down */
+            padding: 20px; /* Indent content */
+        }
+
+        /* --- FOOTER (Now spans full width) --- */
         .footer { 
-            /* THIS PUSHES IT TO BOTTOM */
-            margin-top: auto; 
-            
-            border-top: 1px solid #d2d6de; 
-            padding: 15px; 
             background: white; 
+            padding: 15px; 
+            border-top: 1px solid #d2d6de; 
             color: #444; 
             font-size: 14px; 
-            text-align: right; 
+            
+            /* ALIGNMENT FIXES */
+            text-align: left; /* Moved from Right to Left */
+            width: 100%;
             flex-shrink: 0;
         }
     </style>
@@ -113,10 +126,15 @@
             </ul>
         </aside>
 
-        <div class="content-wrapper">
-            <div th:replace="${content}"></div>
+        <div class="right-column">
             
-            <footer class="footer">Copyright © 2026 JALA Technologies.</footer>
+            <div class="content-container">
+                <div th:replace="${content}"></div>
+            </div>
+            
+            <footer class="footer">
+                <strong>Copyright © 2026 <a href="#" style="color: #3c8dbc; text-decoration:none;">JALA Technologies</a>.</strong> All rights reserved.
+            </footer>
         </div>
     </div>
 

@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       th:replace="~{layout :: main-layout(~{::body})}">
-<head>
-    <title>Tooltip</title>
-    <meta charset="UTF-8">
-
-    
-</head>
 <body>
-	<style>
-	        body {
-	            font-family: Arial, sans-serif;
-	        }
 
-	        .tooltip-container {
-	            position: relative;
-	            display: inline-block;
-	            margin-top: 40px;
-	        }
+    <style>
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 40px;
+            
+            /* --- THE FIX --- */
+            /* Prevents the container from stretching across the screen */
+            width: fit-content; 
+        }
 
-	        .tooltip-text {
-	            visibility: hidden;
-	            background-color: #333;
-	            color: #fff;
-	            text-align: center;
-	            padding: 8px 12px;
-	            border-radius: 4px;
+        .tooltip-text {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 4px;
 
-	            position: absolute;
-	            bottom: -45px;
-	            left: 50%;
-	            transform: translateX(-50%);
-	            white-space: nowrap;
-	        }
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1000; /* Ensure it sits on top of everything */
+            
+            /* Center it relative to the button */
+            left: 50%;
+            bottom: -45px; /* Push it down below the button */
+            transform: translateX(-50%); /* Perfect centering */
+            
+            /* Prevent text wrapping */
+            white-space: nowrap; 
+            
+            /* Optional: Add a small arrow pointing up */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        /* Tooltip Arrow (Optional visual polish) */
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            bottom: 100%; /* At the top of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #333 transparent;
+        }
 
-	        /* Show tooltip on hover */
-	        .tooltip-container:hover .tooltip-text {
-	            visibility: visible;
-	        }
-	    </style>
+        /* Show tooltip on hover */
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
 
-<h2>Tooltip Feature</h2>
+    <h2>Tooltip Feature</h2>
 
-<div class="tooltip-container">
-    <button onclick="buttonClicked()">
-        Check the Tooltip Before You Click
-    </button>
+    <div class="tooltip-container">
+        <button onclick="buttonClicked()">
+            Check the Tooltip Before You Click
+        </button>
 
-    <div class="tooltip-text" id="tooltipText">
-        This is a tooltip message
+        <div class="tooltip-text" id="tooltipText">
+            This is a tooltip message
+        </div>
     </div>
-</div>
 
-<script>
-    function buttonClicked() {
-        document.getElementById("tooltipText").innerText =
-            "You have clicked the button";
-    }
-</script>
+    <script>
+        function buttonClicked() {
+            document.getElementById("tooltipText").innerText =
+                "You have clicked the button";
+        }
+    </script>
 
 </body>
 </html>

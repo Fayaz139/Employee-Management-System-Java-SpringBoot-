@@ -1,118 +1,150 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       th:replace="~{layout :: main-layout(~{::body})}">
-<head>
-    <title>Links</title>
-    <meta charset="UTF-8">
-
-    
-</head>
 <body>
-	<style>
-	        body {
-	            font-family: Arial, sans-serif;
-	        }
 
-	        .tab-btn {
-	            padding: 8px 15px;
-	            margin-right: 5px;
-	            cursor: pointer;
-	            border: 1px solid #ccc;
-	            background: #f2f2f2;
-	        }
+    <style>
+        /* --- TAB STYLES (Copied from tabs.html) --- */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
 
-	        .tab-btn.active {
-	            background: white;
-	            font-weight: bold;
-	        }
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background: #f5f5f5;
+            margin-right: 5px;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
 
-	        .tab-content {
-	            margin-top: 20px;
-	        }
+        .tab-btn:hover {
+            background-color: #e9e9e9;
+        }
 
-	        .hidden {
-	            display: none;
-	        }
+        .tab-btn.active {
+            background: white;
+            font-weight: bold;
+            border-bottom: 2px solid white; /* Hides the bottom line */
+            margin-bottom: -2px; /* Pushes it down to cover the line */
+        }
 
-	        .link-btn {
-	            display: block;
-	            margin: 6px 0;
-	            color: blue;
-	            cursor: pointer;
-	            text-decoration: underline;
-	            background: none;
-	            border: none;
-	            padding: 0;
-	            font-size: 14px;
-	            text-align: left;
-	        }
+        /* --- CONTENT STYLES --- */
+        .tab-content {
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none; /* Merges with the tab above */
+        }
 
-	        img {
-	            width: 80px;
-	            margin-right: 10px;
-	            cursor: pointer;
-	        }
-	    </style>
+        .hidden {
+            display: none;
+        }
 
-<h2>Links Feature</h2>
+        /* --- LINK BUTTON STYLES --- */
+        .link-btn {
+            display: block;
+            margin-bottom: 10px;
+            color: #3c8dbc;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 16px;
+            text-align: left;
+        }
+        
+        .link-btn:hover {
+            color: #286090;
+        }
 
-<!-- Tabs -->
-<button class="tab-btn active" onclick="openTab('working')">Working Links</button>
-<button class="tab-btn" onclick="openTab('broken')">Broken Links</button>
-<button class="tab-btn" onclick="openTab('image')">Image Links</button>
-<button class="tab-btn" onclick="openTab('status')">Status Codes</button>
+        img {
+            width: 100px;
+            margin-right: 20px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+        
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
 
-<!-- Working Links -->
-<div id="working" class="tab-content">
-    <button class="link-btn" onclick="openPopup('https://www.google.com')">Link 1</button>
-    <button class="link-btn" onclick="openPopup('https://www.github.com')">Link 2</button>
-    <button class="link-btn" onclick="openPopup('https://www.stackoverflow.com')">Link 3</button>
-</div>
+    <h2>Links Feature</h2>
 
-<!-- Broken Links -->
-<div id="broken" class="tab-content hidden">
-    <button class="link-btn" onclick="openPopup('https://thissitedoesnotexist123.com')">
-        Broken Link 1
-    </button>
-    <button class="link-btn" onclick="openPopup('https://invalid.test.link')">
-        Broken Link 2
-    </button>
-</div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('working')">Working Links</button>
+        <button class="tab-btn" onclick="openTab('broken')">Broken Links</button>
+        <button class="tab-btn" onclick="openTab('image')">Image Links</button>
+        <button class="tab-btn" onclick="openTab('status')">Status Codes</button>
+    </div>
 
-<!-- Image Links -->
-<div id="image" class="tab-content hidden">
-    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-         onclick="openPopup('https://www.google.com')">
+    <div id="working" class="tab-content">
+        <p style="margin-bottom:15px; color:#666;">Click these links to open them in a new window:</p>
+        <button class="link-btn" onclick="openPopup('https://www.google.com')">Link 1 (Google)</button>
+        <button class="link-btn" onclick="openPopup('https://www.github.com')">Link 2 (GitHub)</button>
+        <button class="link-btn" onclick="openPopup('https://stackoverflow.com')">Link 3 (StackOverflow)</button>
+    </div>
 
-    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-         onclick="openPopup('https://www.github.com')">
-</div>
+    <div id="broken" class="tab-content hidden">
+        <p style="margin-bottom:15px; color:#666;">These links point to non-existent pages:</p>
+        <button class="link-btn" onclick="openPopup('https://thissitedoesnotexist123.com')">
+            Broken Link 1
+        </button>
+        <button class="link-btn" onclick="openPopup('https://invalid.test.link')">
+            Broken Link 2
+        </button>
+    </div>
 
-<!-- Status Codes -->
-<div id="status" class="tab-content hidden">
-    <a th:href="@{/more/status/200}">200</a>
-    <a th:href="@{/more/status/301}">301</a>
-    <a th:href="@{/more/status/404}">404</a>
-    <a th:href="@{/more/status/500}">500</a>
-</div>
+    <div id="image" class="tab-content hidden">
+        <p style="margin-bottom:15px; color:#666;">Click the images to navigate:</p>
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+             onclick="openPopup('https://www.google.com')" title="Go to Google">
 
-<script>
-    function openTab(tab) {
-        document.querySelectorAll(".tab-content").forEach(t => t.classList.add("hidden"));
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+             onclick="openPopup('https://www.github.com')" title="Go to GitHub">
+    </div>
 
-        document.getElementById(tab).classList.remove("hidden");
-        event.target.classList.add("active");
-    }
+    <div id="status" class="tab-content hidden">
+        <p style="margin-bottom:15px; color:#666;">Test different HTTP status codes:</p>
+        <div style="display: flex; gap: 15px;">
+            <a th:href="@{/more/status/200}" class="link-btn">200 OK</a>
+            <a th:href="@{/more/status/301}" class="link-btn">301 Moved</a>
+            <a th:href="@{/more/status/404}" class="link-btn">404 Not Found</a>
+            <a th:href="@{/more/status/500}" class="link-btn">500 Server Error</a>
+        </div>
+    </div>
 
-    function openPopup(url) {
-        window.open(
-            url,
-            "_blank",
-            "width=800,height=600,menubar=yes,toolbar=yes,resizable=yes"
-        );
-    }
-</script>
+    <script>
+        function openTab(tab) {
+            // Hide all contents
+            document.querySelectorAll(".tab-content").forEach(t => t.classList.add("hidden"));
+            // Deactivate all buttons
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+            // Show selected content and activate button
+            document.getElementById(tab).classList.remove("hidden");
+            event.target.classList.add("active");
+        }
+
+        function openPopup(url) {
+            window.open(
+                url,
+                "_blank",
+                "width=800,height=600,menubar=yes,toolbar=yes,resizable=yes"
+            );
+        }
+    </script>
 
 </body>
 </html>
