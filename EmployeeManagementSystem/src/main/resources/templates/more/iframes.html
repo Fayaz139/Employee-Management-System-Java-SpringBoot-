@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>iFrames</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .frame-container {
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            border: 1px solid #999;
+        }
+
+        .frame-small {
+            height: 200px;
+        }
+
+        .frame-medium {
+            height: 300px;
+        }
+
+        .frame-large {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>iFrames Feature</h2>
+
+<div class="frame-container">
+    <h4>Frame 1 — Java</h4>
+    <iframe
+        src="https://dev.java/"
+        class="frame-small">
+    </iframe>
+</div>
+
+<div class="frame-container">
+    <h4>Frame 2 — Spring Boot</h4>
+    <iframe
+        src="https://spring.io/projects/spring-boot"
+        class="frame-medium">
+    </iframe>
+</div>
+
+<div class="frame-container">
+    <h4>Frame 3 — Jala Academy</h4>
+    <iframe
+        src="https://jalaacademy.com/"
+        class="frame-large">
+    </iframe>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu Feature</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Tabs */
+        .tab-container {
+            margin-bottom: 15px;
+        }
+        .tab-btn {
+            padding: 8px 15px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background: #f2f2f2;
+            margin-right: 5px;
+        }
+        .tab-btn.active {
+            background: white;
+            font-weight: bold;
+        }
+
+        /* Menu layout */
+        .menu-container {
+            display: flex;
+            border: 1px solid #ccc;
+            min-height: 220px;
+        }
+
+        .menu {
+            width: 200px;
+            border-right: 1px solid #ccc;
+            background: #fafafa;
+        }
+
+        .content {
+            padding: 15px;
+            flex: 1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Single menu */
+        .menu-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background: #e0e0e0;
+        }
+
+        /* Sub menu */
+        .parent-menu {
+            position: relative;
+            padding: 10px;
+            cursor: pointer;
+            background: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .parent-menu:hover {
+            background: #e0e0e0;
+        }
+
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background: #ffffff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-width: 180px;
+            z-index: 1000;
+        }
+
+        /* KEY LINE: show submenu on hover */
+        .parent-menu:hover .sub-menu {
+            display: block;
+        }
+
+        .sub-menu button {
+            display: block;
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            text-align: left;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+
+        .sub-menu button:hover {
+            background: #e6e6e6;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Menu Feature</h2>
+
+<!-- Tabs -->
+<div class="tab-container">
+    <button class="tab-btn active" onclick="openTab('single')">Single Menu</button>
+    <button class="tab-btn" onclick="openTab('sub')">Sub Menu</button>
+</div>
+
+<!-- Single Menu -->
+<div id="single" class="menu-container">
+    <div class="menu">
+        <div class="menu-item" onclick="showSingleContent('Testing')">Testing</div>
+        <div class="menu-item" onclick="showSingleContent('Java')">Java</div>
+        <div class="menu-item" onclick="showSingleContent('Database')">Database</div>
+    </div>
+    <div class="content" id="singleContent">
+        Select a menu item
+    </div>
+</div>
+
+<!-- Sub Menu -->
+<div id="sub" class="menu-container hidden">
+    <div class="menu">
+
+        <div class="parent-menu">
+            JAVA
+            <div class="sub-menu">
+                <button onclick="subMenuClicked('Core Java')">Core Java</button>
+                <button onclick="subMenuClicked('Advanced Java')">Advanced Java</button>
+                <button onclick="subMenuClicked('Spring')">Spring</button>
+                <button onclick="subMenuClicked('Hibernate')">Hibernate</button>
+            </div>
+        </div>
+
+        <div class="parent-menu">
+            .NET
+            <div class="sub-menu">
+                <button onclick="subMenuClicked('C#')">C#</button>
+                <button onclick="subMenuClicked('ASP.NET')">ASP.NET</button>
+                <button onclick="subMenuClicked('.NET Core')">.NET Core</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content" id="subContent">
+        Select a menu item
+    </div>
+</div>
+
+<script>
+    function openTab(tab) {
+        document.getElementById("single").classList.add("hidden");
+        document.getElementById("sub").classList.add("hidden");
+
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        event.target.classList.add("active");
+
+        document.getElementById(tab).classList.remove("hidden");
+    }
+
+    function showSingleContent(text) {
+        document.getElementById("singleContent").innerText =
+            "You selected: " + text;
+    }
+
+    function subMenuClicked(name) {
+        document.getElementById("subContent").innerText =
+            "You selected: " + name;
+    }
+</script>
+
+</body>
+</html>

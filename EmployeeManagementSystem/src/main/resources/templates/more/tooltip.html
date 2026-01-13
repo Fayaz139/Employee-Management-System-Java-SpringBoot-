@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tooltip</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 40px;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 4px;
+
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        /* Show tooltip on hover */
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tooltip Feature</h2>
+
+<div class="tooltip-container">
+    <button onclick="buttonClicked()">
+        Check the Tooltip Before You Click
+    </button>
+
+    <div class="tooltip-text" id="tooltipText">
+        This is a tooltip message
+    </div>
+</div>
+
+<script>
+    function buttonClicked() {
+        document.getElementById("tooltipText").innerText =
+            "You have clicked the button";
+    }
+</script>
+
+</body>
+</html>

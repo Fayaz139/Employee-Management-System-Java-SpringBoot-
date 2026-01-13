@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Slider</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 300px;
+            margin-top: 40px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .value {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Slider Feature</h2>
+
+<div class="container">
+    <input type="range" min="0" max="10" value="5"
+           oninput="updateValue(this.value)">
+    <div class="value">
+        Current Slider Value: <span id="sliderValue">5</span>
+    </div>
+</div>
+
+<script>
+    function updateValue(val) {
+        document.getElementById("sliderValue").innerText = val;
+    }
+</script>
+
+</body>
+</html>

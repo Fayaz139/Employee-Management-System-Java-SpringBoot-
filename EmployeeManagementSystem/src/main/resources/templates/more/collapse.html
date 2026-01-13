@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Collapse</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tab-container {
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            padding: 8px 15px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background: #f2f2f2;
+            margin-right: 5px;
+        }
+
+        .tab-btn.active {
+            background: white;
+            font-weight: bold;
+        }
+
+        .collapse-box {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .collapse-header {
+            padding: 10px;
+            cursor: pointer;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapse-content {
+            display: none;
+            padding: 10px;
+        }
+
+        .icon {
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Collapse Feature</h2>
+
+<!-- Tabs -->
+<div class="tab-container">
+    <button class="tab-btn active" onclick="openTab('single')">Single Collapse</button>
+    <button class="tab-btn" onclick="openTab('multiple')">Multiple Collapse</button>
+</div>
+
+<!-- Single Collapse -->
+<div id="single">
+    <div class="collapse-box">
+        <div class="collapse-header" onclick="singleToggle(this)">
+            Section 1 <span class="icon">+</span>
+        </div>
+        <div class="collapse-content">
+            Content for section 1
+        </div>
+    </div>
+
+    <div class="collapse-box">
+        <div class="collapse-header" onclick="singleToggle(this)">
+            Section 2 <span class="icon">+</span>
+        </div>
+        <div class="collapse-content">
+            Content for section 2
+        </div>
+    </div>
+</div>
+
+<!-- Multiple Collapse -->
+<div id="multiple" class="hidden">
+    <div class="collapse-box">
+        <div class="collapse-header" onclick="multipleToggle(this)">
+            Item A <span class="icon">+</span>
+        </div>
+        <div class="collapse-content">
+            Content for item A
+        </div>
+    </div>
+
+    <div class="collapse-box">
+        <div class="collapse-header" onclick="multipleToggle(this)">
+            Item B <span class="icon">+</span>
+        </div>
+        <div class="collapse-content">
+            Content for item B
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(tab) {
+        document.getElementById("single").classList.add("hidden");
+        document.getElementById("multiple").classList.add("hidden");
+
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        event.target.classList.add("active");
+
+        document.getElementById(tab).classList.remove("hidden");
+    }
+
+    function singleToggle(header) {
+        document.querySelectorAll("#single .collapse-content").forEach(c => {
+            c.style.display = "none";
+            c.previousElementSibling.querySelector(".icon").innerText = "+";
+        });
+
+        const content = header.nextElementSibling;
+        if (content.style.display !== "block") {
+            content.style.display = "block";
+            header.querySelector(".icon").innerText = "-";
+        }
+    }
+
+    function multipleToggle(header) {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector(".icon");
+
+        if (content.style.display === "block") {
+            content.style.display = "none";
+            icon.innerText = "+";
+        } else {
+            content.style.display = "block";
+            icon.innerText = "-";
+        }
+    }
+</script>
+
+</body>
+</html>

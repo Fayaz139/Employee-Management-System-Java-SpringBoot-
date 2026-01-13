@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tabs</title>
+    <meta charset="UTF-8">
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background: #f5f5f5;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: white;
+            font-weight: bold;
+        }
+        .content {
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tabs Feature</h2>
+
+<div class="tabs">
+    <div class="tab active" onclick="openTab('tab1')">Plan to Succeed</div>
+    <div class="tab" onclick="openTab('tab2')">Unlearning</div>
+    <div class="tab" onclick="openTab('tab3')">Ways of Unlearning</div>
+</div>
+
+<div class="content">
+    <div id="tab1" class="content-section active">
+        <p>Plan to succeed by setting clear goals and following a structured approach.</p>
+    </div>
+    <div id="tab2" class="content-section">
+        <p>Unlearning is the process of letting go of outdated knowledge and habits.</p>
+    </div>
+    <div id="tab3" class="content-section">
+        <p>Ways of unlearning include reflection, experimentation, and openness to change.</p>
+    </div>
+</div>
+
+<script>
+    function openTab(tabId) {
+        let tabs = document.getElementsByClassName("tab");
+        let contents = document.getElementsByClassName("content-section");
+
+        for (let tab of tabs) {
+            tab.classList.remove("active");
+        }
+        for (let content of contents) {
+            content.classList.remove("active");
+        }
+
+        document.getElementById(tabId).classList.add("active");
+        event.target.classList.add("active");
+    }
+</script>
+
+</body>
+</html>

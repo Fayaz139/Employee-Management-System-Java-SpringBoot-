@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Links</title>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .tab-btn {
+            padding: 8px 15px;
+            margin-right: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background: #f2f2f2;
+        }
+
+        .tab-btn.active {
+            background: white;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .link-btn {
+            display: block;
+            margin: 6px 0;
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        img {
+            width: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Links Feature</h2>
+
+<!-- Tabs -->
+<button class="tab-btn active" onclick="openTab('working')">Working Links</button>
+<button class="tab-btn" onclick="openTab('broken')">Broken Links</button>
+<button class="tab-btn" onclick="openTab('image')">Image Links</button>
+<button class="tab-btn" onclick="openTab('status')">Status Codes</button>
+
+<!-- Working Links -->
+<div id="working" class="tab-content">
+    <button class="link-btn" onclick="openPopup('https://www.google.com')">Link 1</button>
+    <button class="link-btn" onclick="openPopup('https://www.github.com')">Link 2</button>
+    <button class="link-btn" onclick="openPopup('https://www.stackoverflow.com')">Link 3</button>
+</div>
+
+<!-- Broken Links -->
+<div id="broken" class="tab-content hidden">
+    <button class="link-btn" onclick="openPopup('https://thissitedoesnotexist123.com')">
+        Broken Link 1
+    </button>
+    <button class="link-btn" onclick="openPopup('https://invalid.test.link')">
+        Broken Link 2
+    </button>
+</div>
+
+<!-- Image Links -->
+<div id="image" class="tab-content hidden">
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+         onclick="openPopup('https://www.google.com')">
+
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+         onclick="openPopup('https://www.github.com')">
+</div>
+
+<!-- Status Codes -->
+<div id="status" class="tab-content hidden">
+    <a th:href="@{/more/status/200}">200</a>
+    <a th:href="@{/more/status/301}">301</a>
+    <a th:href="@{/more/status/404}">404</a>
+    <a th:href="@{/more/status/500}">500</a>
+</div>
+
+<script>
+    function openTab(tab) {
+        document.querySelectorAll(".tab-content").forEach(t => t.classList.add("hidden"));
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+
+        document.getElementById(tab).classList.remove("hidden");
+        event.target.classList.add("active");
+    }
+
+    function openPopup(url) {
+        window.open(
+            url,
+            "_blank",
+            "width=800,height=600,menubar=yes,toolbar=yes,resizable=yes"
+        );
+    }
+</script>
+
+</body>
+</html>

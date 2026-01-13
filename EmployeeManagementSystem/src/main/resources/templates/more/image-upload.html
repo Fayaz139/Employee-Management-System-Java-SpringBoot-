@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Image Upload</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .upload-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .upload-box input[type="text"],
+        .upload-box input[type="file"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .image-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .image-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            width: 150px;
+            text-align: center;
+        }
+
+        .image-card img {
+            max-width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Image Upload</h2>
+
+<!-- Upload Form -->
+<div class="upload-box">
+    <form method="post"
+          th:action="@{/more/image-upload}"
+          enctype="multipart/form-data">
+
+        <label>Image Name</label>
+        <input type="text" name="imageName" required>
+
+        <label>Select Image</label>
+        <input type="file" name="imageFile" accept="image/*" required>
+
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+<!-- Uploaded Images -->
+<div>
+    <h3>Uploaded Images</h3>
+
+    <div class="image-list">
+        <div class="image-card" th:each="img : ${images}">
+            <img th:src="${img.filePath}" alt="Image">
+            <p th:text="${img.fileName}"></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

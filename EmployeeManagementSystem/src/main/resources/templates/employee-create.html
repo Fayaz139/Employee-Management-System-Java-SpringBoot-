@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Employee</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Create Employee</h2>
+
+<form th:action="@{/employees/save}" th:object="${employee}" method="post">
+
+	<input type="hidden" th:field="*{id}" />
+	
+    <label>First Name:</label><br>
+    <input type="text" th:field="*{firstName}" /><br><br>
+
+    <label>Last Name:</label><br>
+    <input type="text" th:field="*{lastName}" /><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" th:field="*{email}" /><br><br>
+
+    <label>Mobile Number:</label><br>
+    <input type="text" th:field="*{mobileNumber}" /><br><br>
+
+    <label>Date of Birth:</label><br>
+    <input type="date" th:field="*{dateOfBirth}" /><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" th:field="*{gender}" value="Male" /> Male
+    <input type="radio" th:field="*{gender}" value="Female" /> Female
+    <br><br>
+
+    <label>Address:</label><br>
+    <textarea th:field="*{address}"></textarea><br><br>
+
+    <label>Country:</label><br>
+    <select th:field="*{country}">
+        <option value="">--Select--</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+    </select>
+    <br><br>
+
+    <label>City:</label><br>
+    <select th:field="*{city}">
+        <option value="">--Select--</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Delhi">Delhi</option>
+    </select>
+    <br><br>
+
+	<label>Skills:</label><br>
+	<input type="checkbox"
+	       value="AWS"
+	       th:checked="${employee.skills != null and employee.skills.contains('AWS')}"
+	       onclick="updateSkills(this)"> AWS
+	<input type="checkbox"
+	       value="DevOps"
+	       th:checked="${employee.skills != null and employee.skills.contains('DevOps')}"
+	       onclick="updateSkills(this)"> DevOps
+	<input type="checkbox"
+	       value="WebServices"
+	       th:checked="${employee.skills != null and employee.skills.contains('WebServices')}"
+	       onclick="updateSkills(this)"> WebServices
+	<br><br>
+
+    <!-- Hidden field to store skills -->
+    <input type="hidden" th:field="*{skills}" id="skills"/>
+
+    <button type="submit">Save</button>
+    <a href="/employees">Cancel</a>
+
+</form>
+
+<script>
+    function updateSkills(checkbox) {
+        let hidden = document.getElementById("skills");
+        let skills = hidden.value ? hidden.value.split(",") : [];
+
+        if (checkbox.checked) {
+            skills.push(checkbox.value);
+        } else {
+            skills = skills.filter(s => s !== checkbox.value);
+        }
+
+        hidden.value = skills.join(",");
+    }
+</script>
+
+</body>
+</html>

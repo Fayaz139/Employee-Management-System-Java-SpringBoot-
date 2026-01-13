@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Status Code</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Status Code Explanation</h2>
+
+<p th:switch="${code}">
+    <span th:case="'200'">200 – OK: The request was successful.</span>
+    <span th:case="'301'">301 – Moved Permanently: The resource has been moved.</span>
+    <span th:case="'404'">404 – Not Found: The requested resource does not exist.</span>
+    <span th:case="'500'">500 – Internal Server Error: Server encountered an error.</span>
+    <span th:case="*">Unknown status code.</span>
+</p>
+
+</body>
+</html>
