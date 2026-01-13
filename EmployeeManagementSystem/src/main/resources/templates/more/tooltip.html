@@ -1,42 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: main-layout(~{::body})}">
 <head>
     <title>Tooltip</title>
     <meta charset="UTF-8">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .tooltip-container {
-            position: relative;
-            display: inline-block;
-            margin-top: 40px;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 8px 12px;
-            border-radius: 4px;
-
-            position: absolute;
-            bottom: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-        }
-
-        /* Show tooltip on hover */
-        .tooltip-container:hover .tooltip-text {
-            visibility: visible;
-        }
-    </style>
+    
 </head>
 <body>
+	<style>
+	        body {
+	            font-family: Arial, sans-serif;
+	        }
+
+	        .tooltip-container {
+	            position: relative;
+	            display: inline-block;
+	            margin-top: 40px;
+	        }
+
+	        .tooltip-text {
+	            visibility: hidden;
+	            background-color: #333;
+	            color: #fff;
+	            text-align: center;
+	            padding: 8px 12px;
+	            border-radius: 4px;
+
+	            position: absolute;
+	            bottom: -45px;
+	            left: 50%;
+	            transform: translateX(-50%);
+	            white-space: nowrap;
+	        }
+
+	        /* Show tooltip on hover */
+	        .tooltip-container:hover .tooltip-text {
+	            visibility: visible;
+	        }
+	    </style>
 
 <h2>Tooltip Feature</h2>
 

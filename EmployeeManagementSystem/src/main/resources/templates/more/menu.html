@@ -1,108 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: main-layout(~{::body})}">
 <head>
     <title>Menu Feature</title>
     <meta charset="UTF-8">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        /* Tabs */
-        .tab-container {
-            margin-bottom: 15px;
-        }
-        .tab-btn {
-            padding: 8px 15px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            background: #f2f2f2;
-            margin-right: 5px;
-        }
-        .tab-btn.active {
-            background: white;
-            font-weight: bold;
-        }
-
-        /* Menu layout */
-        .menu-container {
-            display: flex;
-            border: 1px solid #ccc;
-            min-height: 220px;
-        }
-
-        .menu {
-            width: 200px;
-            border-right: 1px solid #ccc;
-            background: #fafafa;
-        }
-
-        .content {
-            padding: 15px;
-            flex: 1;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Single menu */
-        .menu-item {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .menu-item:hover {
-            background: #e0e0e0;
-        }
-
-        /* Sub menu */
-        .parent-menu {
-            position: relative;
-            padding: 10px;
-            cursor: pointer;
-            background: #f2f2f2;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .parent-menu:hover {
-            background: #e0e0e0;
-        }
-
-        .sub-menu {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            background: #ffffff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            min-width: 180px;
-            z-index: 1000;
-        }
-
-        /* KEY LINE: show submenu on hover */
-        .parent-menu:hover .sub-menu {
-            display: block;
-        }
-
-        .sub-menu button {
-            display: block;
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            text-align: left;
-            border: 1px solid #ccc;
-            background: #f9f9f9;
-        }
-
-        .sub-menu button:hover {
-            background: #e6e6e6;
-        }
-    </style>
+    
 </head>
 <body>
+	<style>
+	        body {
+	            font-family: Arial, sans-serif;
+	        }
+
+	        /* Tabs */
+	        .tab-container {
+	            margin-bottom: 15px;
+	        }
+	        .tab-btn {
+	            padding: 8px 15px;
+	            cursor: pointer;
+	            border: 1px solid #ccc;
+	            background: #f2f2f2;
+	            margin-right: 5px;
+	        }
+	        .tab-btn.active {
+	            background: white;
+	            font-weight: bold;
+	        }
+
+	        /* Menu layout */
+	        .menu-container {
+	            display: flex;
+	            border: 1px solid #ccc;
+	            min-height: 220px;
+	        }
+
+	        .menu {
+	            width: 200px;
+	            border-right: 1px solid #ccc;
+	            background: #fafafa;
+	        }
+
+	        .content {
+	            padding: 15px;
+	            flex: 1;
+	        }
+
+	        .hidden {
+	            display: none;
+	        }
+
+	        /* Single menu */
+	        .menu-item {
+	            padding: 10px;
+	            cursor: pointer;
+	        }
+	        .menu-item:hover {
+	            background: #e0e0e0;
+	        }
+
+	        /* Sub menu */
+	        .parent-menu {
+	            position: relative;
+	            padding: 10px;
+	            cursor: pointer;
+	            background: #f2f2f2;
+	            border-bottom: 1px solid #ddd;
+	        }
+
+	        .parent-menu:hover {
+	            background: #e0e0e0;
+	        }
+
+	        .sub-menu {
+	            display: none;
+	            position: absolute;
+	            top: 0;
+	            left: 100%;
+	            background: #ffffff;
+	            border: 1px solid #ccc;
+	            padding: 10px;
+	            min-width: 180px;
+	            z-index: 1000;
+	        }
+
+	        /* KEY LINE: show submenu on hover */
+	        .parent-menu:hover .sub-menu {
+	            display: block;
+	        }
+
+	        .sub-menu button {
+	            display: block;
+	            width: 100%;
+	            padding: 6px;
+	            margin-bottom: 6px;
+	            cursor: pointer;
+	            text-align: left;
+	            border: 1px solid #ccc;
+	            background: #f9f9f9;
+	        }
+
+	        .sub-menu button:hover {
+	            background: #e6e6e6;
+	        }
+	    </style>
 
 <h2>Menu Feature</h2>
 

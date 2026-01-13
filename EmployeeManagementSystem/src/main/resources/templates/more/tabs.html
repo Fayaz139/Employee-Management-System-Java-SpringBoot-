@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: main-layout(~{::body})}">
 <head>
     <title>Tabs</title>
     <meta charset="UTF-8">
-    <style>
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #ccc;
-        }
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            background: #f5f5f5;
-            margin-right: 5px;
-        }
-        .tab.active {
-            background: white;
-            font-weight: bold;
-        }
-        .content {
-            border: 1px solid #ccc;
-            padding: 20px;
-        }
-        .content-section {
-            display: none;
-        }
-        .content-section.active {
-            display: block;
-        }
-    </style>
+    
 </head>
 <body>
+	<style>
+	        .tabs {
+	            display: flex;
+	            border-bottom: 2px solid #ccc;
+	        }
+	        .tab {
+	            padding: 10px 20px;
+	            cursor: pointer;
+	            border: 1px solid #ccc;
+	            border-bottom: none;
+	            background: #f5f5f5;
+	            margin-right: 5px;
+	        }
+	        .tab.active {
+	            background: white;
+	            font-weight: bold;
+	        }
+	        .content {
+	            border: 1px solid #ccc;
+	            padding: 20px;
+	        }
+	        .content-section {
+	            display: none;
+	        }
+	        .content-section.active {
+	            display: block;
+	        }
+	    </style>
 
 <h2>Tabs Feature</h2>
 
