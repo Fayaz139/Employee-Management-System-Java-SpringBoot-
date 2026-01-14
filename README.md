@@ -85,13 +85,16 @@ The application uses a default administrator account for demonstration purposes:
 ## 📂 Project Structure
 
 ```text
-src/main/java/com/fayaz/project
-├── config/           # Web configuration & Auth Interceptors
-├── controller/       # MVC Controllers (Login, Employee, Image, More)
-├── entity/           # JPA Entities (Employee, Image)
-├── repository/       # Data Access Interfaces (Spring Data JPA)
-├── service/          # Business Logic Layer
-└── EmployeeManagementSystemApplication.java  # Main Entry Point
+src/main
+├── java/com/fayaz/project (backend)
+│   ├── config/       # Web Config & Auth Interceptors
+│   ├── controller/   # MVC Controllers (Handles Routes)
+│   ├── entity/       # Database Models (JPA Entities)
+│   ├── repository/   # Data Access Layer (Interfaces)
+│   └── service/      # Business Logic & Service Implementation
+└── resources (frontend)
+    ├── static/       # Public Assets (CSS, JS, Images, Uploads)
+    └── templates/    # Thymeleaf HTML Views
 ```
 
 ## 🗄️ Database Configuration
